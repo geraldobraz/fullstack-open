@@ -1,34 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Content from './components/Content/Content';
+import Header from './components/Header/Header';
+import Total from './components/Total/Total';
 import './index.css';
 
-const Hello = (props) => {
-  return (
-    <div>
-      <p>Hello {props.name}, you are {props.age} years old</p>
-    </div>
-  );
-}
-
-const Footer = () => {
-  return (
-    <div>
-      greetings app created by <a href="https://github.com/geraldobraz">geraldobraz</a>
-    </div>
-  );
-}
-
-
 const App = () => {
-  const name = 'Geraldo';
-  const age = 25;
-
+  const course = 'Half Stack application development';
+  const part1 = 'Fundamentals of React';
+  const exercises1 = 10;
+  const part2 = 'Using props to pass data';
+  const exercises2 = 7;
+  const part3 = 'State of a component';
+  const exercises3 = 14;
+  
   return (
     <>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age}/>
-      <Footer />
+      <Header course={course} />
+      <Content 
+        part1={part1}
+        exercises1={exercises1}
+        part2={part2}
+        exercises2={exercises2}
+        part3={part3}
+        exercises3={exercises3}
+      />
+      <Total 
+        exercises1={exercises1}
+        exercises2={exercises2}
+        exercises3={exercises3}
+      />
     </>
   );
 };
