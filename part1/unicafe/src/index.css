@@ -1,0 +1,65 @@
+* {
+  color: #343330;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: #fff8dc;
+  height: 100vh;
+  text-align: center;
+  width: 100%;
+}
+
+.App h2 {
+  margin-top: 20px;
+}
+
+.App > div {
+  margin-top: 20px;
+}
+
+.buttons-section button {
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+  outline: none;
+  width: 70px;
+}
+
+.buttons-section button:hover {
+  opacity: 0.9;
+}
+
+.good-button {
+  color: #FFF8DC;
+  background-color: #08A045;
+}
+
+.neutral-button {
+  color: #343330;
+  background-color: #86BBD8;
+}
+
+.bad-button {
+  color: #FFF8DC;
+  background-color: #B80C09;
+}
+
+.statistics-section {
+  justify-content: center;
+  display: flex;
+}
+
+.statistics-section div {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.statistics-section div label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
