@@ -7,7 +7,8 @@
 .App {
   background-color: #fff8dc;
   height: 100vh;
-  text-align: center;
+  /* text-align: center; */
+  padding-left: 10px;
   width: 100%;
 }
 
@@ -47,19 +48,8 @@
   background-color: #B80C09;
 }
 
-.statistics-section {
-  justify-content: center;
-  display: flex;
-}
-
-.statistics-section div {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-
-.statistics-section div label {
+.statistics-section td label {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
 }

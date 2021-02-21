@@ -4,10 +4,14 @@ import './index.css';
 
 const Statistic = ({ text, value, isPercentage=false }) => {
   return (
-    <div>
-      <label>{text}</label> 
-      {value} {isPercentage && '%'}
-    </div>
+    <tr>
+      <td>
+        <label>{text}</label> 
+      </td>
+      <td>
+        {value} {isPercentage && '%'}
+      </td>      
+    </tr>
   );
 };
 
@@ -36,14 +40,16 @@ const Statistics = ({
       <h2>Statistics</h2>
       <div className="statistics-section">
       {feedbacksQuantity > 0 ? (
-        <>
-          <Statistic text="Good" value={goodFeedbacks} />
-          <Statistic text="Neutral" value={neutralFeedbacks} />
-          <Statistic text="Bad" value={badFeedbacks} />
-          <Statistic text="All" value={feedbacksQuantity} />
-          <Statistic text="Average" value={average} />
-          <Statistic text="Positive" value={positive} isPercentage/>
-        </>
+        <table>
+          <tbody>
+            <Statistic text="Good" value={goodFeedbacks} />
+            <Statistic text="Neutral" value={neutralFeedbacks} />
+            <Statistic text="Bad" value={badFeedbacks} />
+            <Statistic text="All" value={feedbacksQuantity} />
+            <Statistic text="Average" value={average} />
+            <Statistic text="Positive" value={positive} isPercentage/>
+          </tbody>
+        </table>
       ) :
       (
         <div>
