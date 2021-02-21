@@ -2,6 +2,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const Statistic = ({ text, value, isPercentage=false }) => {
+  return (
+    <div>
+      <label>{text}</label> 
+      {value} {isPercentage && '%'}
+    </div>
+  );
+};
+
 const Statistics = ({
   goodFeedbacks,
   neutralFeedbacks,
@@ -26,32 +35,14 @@ const Statistics = ({
     <>
       <h2>Statistics</h2>
       <div className="statistics-section">
-      {feedbacksQuantity > 0  ? (
+      {feedbacksQuantity > 0 ? (
         <>
-          <div>
-            <label>Good</label> 
-            {goodFeedbacks}
-          </div>
-          <div>
-            <label>Neutral</label> 
-            {neutralFeedbacks}
-          </div>
-          <div>
-            <label>Bad</label> 
-            {badFeedbacks}
-          </div>
-          <div>
-            <label>All</label> 
-            {feedbacksQuantity}
-          </div>
-          <div>
-            <label>Average</label> 
-            {average}
-          </div>
-          <div>
-            <label>Positive</label> 
-            {positive} %
-          </div>
+          <Statistic text="Good" value={goodFeedbacks} />
+          <Statistic text="Neutral" value={neutralFeedbacks} />
+          <Statistic text="Bad" value={badFeedbacks} />
+          <Statistic text="All" value={feedbacksQuantity} />
+          <Statistic text="Average" value={average} />
+          <Statistic text="Positive" value={positive} isPercentage/>
         </>
       ) :
       (
@@ -63,7 +54,9 @@ const Statistics = ({
       </div>
     </>
   );
-}
+};
+
+const Button = ({ onClick, customClass, text }) => (<button className={customClass} onClick={onClick} >{text}</button>);
 
 const App = () => {
   const [goodFeedbacks, setGoodFeedbacks] = useState(0);
@@ -88,9 +81,9 @@ const App = () => {
       <h1>Give your feedback</h1>
 
       <div className="buttons-section">
-        <button className="good-button" onClick={handleGoodFeedback} >Good</button>
-        <button className="neutral-button" onClick={handleNeutralFeedback} >Neutral</button>
-        <button className="bad-button" onClick={handleBadFeedback} >Bad</button>
+        <Button customClass="good-button" onClick={handleGoodFeedback} text="Good" />
+        <Button customClass="neutral-button" onClick={handleNeutralFeedback} text="Neutral" />
+        <Button customClass="bad-button" onClick={handleBadFeedback} text="Bad" />
       </div>
 
       <Statistics 
@@ -101,6 +94,6 @@ const App = () => {
 
     </div>
   );
-}
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
