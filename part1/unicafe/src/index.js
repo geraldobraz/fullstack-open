@@ -1,24 +1,38 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
 function App() {
-  const [goodFeedBacks, setGoodFeedBacks] = useState(0)
-  const [neutralFeedBacks, setNeutralFeedBacks] = useState(0)
-  const [badFeedBacks, setBadFeedBacks] = useState(0)
+  const [goodFeedbacks, setGoodFeedbacks] = useState(0)
+  const [neutralFeedbacks, setNeutralFeedbacks] = useState(0)
+  const [badFeedbacks, setBadFeedbacks] = useState(0)
+  const [feedbacksQuantity, setFeedbacksQuantity] = useState(0)
+  const [average, setAverage] = useState(0)
+  const [positive, setPositive] = useState(0)
 
   const handleGoodFeedback = useCallback(() => {
-    setGoodFeedBacks(goodFeedBacks+1);
-  }, [goodFeedBacks]);
+    setGoodFeedbacks(goodFeedbacks+1);
+  }, [goodFeedbacks]);
 
   const handleNeutralFeedback = useCallback(() => {
-    setNeutralFeedBacks(neutralFeedBacks+1);
-  }, [neutralFeedBacks]);
+    setNeutralFeedbacks(neutralFeedbacks+1);
+  }, [neutralFeedbacks]);
   
   const handleBadFeedback = useCallback(() => {
-    setBadFeedBacks(badFeedBacks+1);
-  }, [badFeedBacks]);
-  
+    setBadFeedbacks(badFeedbacks+1);
+  }, [badFeedbacks]);
+
+  useEffect(() => {
+    const quantity = goodFeedbacks + neutralFeedbacks + badFeedbacks;
+    const average = quantity/3;
+    const positive = quantity ? 100 * (goodFeedbacks/quantity) : 0;
+
+    setFeedbacksQuantity(quantity);
+    setAverage(average);
+    setPositive(positive);
+
+  }, [goodFeedbacks, neutralFeedbacks, badFeedbacks]);
+
   return (
     <div className="App">
       <h1>Give your feedback</h1>
@@ -33,15 +47,27 @@ function App() {
       <div className="statistics-section">
         <div>
           <label>Good</label> 
-          {goodFeedBacks}
+          {goodFeedbacks}
         </div>
         <div>
           <label>Neutral</label> 
-          {neutralFeedBacks}
+          {neutralFeedbacks}
         </div>
         <div>
           <label>Bad</label> 
-          {badFeedBacks}
+          {badFeedbacks}
+        </div>
+        <div>
+          <label>All</label> 
+          {feedbacksQuantity}
+        </div>
+        <div>
+          <label>Average</label> 
+          {average}
+        </div>
+        <div>
+          <label>Positive</label> 
+          {positive} %
         </div>
       </div>
 
