@@ -26,30 +26,40 @@ const Statistics = ({
     <>
       <h2>Statistics</h2>
       <div className="statistics-section">
+      {feedbacksQuantity > 0  ? (
+        <>
+          <div>
+            <label>Good</label> 
+            {goodFeedbacks}
+          </div>
+          <div>
+            <label>Neutral</label> 
+            {neutralFeedbacks}
+          </div>
+          <div>
+            <label>Bad</label> 
+            {badFeedbacks}
+          </div>
+          <div>
+            <label>All</label> 
+            {feedbacksQuantity}
+          </div>
+          <div>
+            <label>Average</label> 
+            {average}
+          </div>
+          <div>
+            <label>Positive</label> 
+            {positive} %
+          </div>
+        </>
+      ) :
+      (
         <div>
-          <label>Good</label> 
-          {goodFeedbacks}
+          No feedback given
         </div>
-        <div>
-          <label>Neutral</label> 
-          {neutralFeedbacks}
-        </div>
-        <div>
-          <label>Bad</label> 
-          {badFeedbacks}
-        </div>
-        <div>
-          <label>All</label> 
-          {feedbacksQuantity}
-        </div>
-        <div>
-          <label>Average</label> 
-          {average}
-        </div>
-        <div>
-          <label>Positive</label> 
-          {positive} %
-        </div>
+      )
+      }
       </div>
     </>
   );
