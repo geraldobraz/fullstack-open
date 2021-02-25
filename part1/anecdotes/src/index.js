@@ -12,17 +12,26 @@ const anecdotes = [
 ];
 
 const App = () => {
-  const [anecdote, setAnecdote] = useState(anecdotes[0]);
-
+  const [index, setIndex] = useState(0);
+  const [anecdote, setAnecdote] = useState(anecdotes[index]);
+  const [points, setPoints] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
+  
   const handleNextAnecdote = useCallback(() => {
-    const index = Math.floor((Math.random() * anecdotes.length-1));
+    const index = Math.floor((Math.random() * anecdotes.length));
+    setIndex(index);
     setAnecdote(anecdotes[index]);
-
   }, []);
+
+  const handleAnecdoteVote = useCallback(() => {
+    const newPoints = { [index]: points[index]++ }
+    setPoints({ ...points, newPoints })
+  }, [index, points]);
 
   return (
     <>
       <p>{anecdote}</p>
+      <p>Has {points[index]}</p>
+      <button onClick={handleAnecdoteVote}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
     </>
   );
