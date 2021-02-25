@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -15,7 +15,9 @@ const App = () => {
   const [index, setIndex] = useState(0);
   const [anecdote, setAnecdote] = useState(anecdotes[index]);
   const [points, setPoints] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
+  const [mostVoted, setMostVoted] = useState({ anecdote: '', votes: 0 });
   
+
   const handleNextAnecdote = useCallback(() => {
     const index = Math.floor((Math.random() * anecdotes.length));
     setIndex(index);
@@ -27,12 +29,26 @@ const App = () => {
     setPoints({ ...points, newPoints })
   }, [index, points]);
 
+  useEffect(() => {
+    const votes = points[index];
+    if (votes > mostVoted.votes) {
+      const value = { anecdote: anecdote, votes: votes };
+      setMostVoted(value);
+    }
+
+  }, [anecdote, index, mostVoted.votes, points]);
+
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <p>{anecdote}</p>
       <p>Has {points[index]}</p>
       <button onClick={handleAnecdoteVote}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      <p>{mostVoted.anecdote}</p>
+      <p>Has {mostVoted.votes}</p>
     </>
   );
 };
