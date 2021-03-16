@@ -6,6 +6,7 @@
 
 ## 🗂 Summary
 - [Part 1](https://fullstackopen.com/en/part1) 
+- [Part 2](https://fullstackopen.com/en/part2) 
 
 
 ## 🚀 Getting Started
