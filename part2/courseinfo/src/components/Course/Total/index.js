@@ -4,7 +4,7 @@ const Total = ({parts}) => {
   const total = parts.reduce((acc, num) => acc + num.exercises, 0);
   
   return (
-    <p>Number of exercises {total}</p>
+    <strong>Number of exercises {total}</strong>
   )
 };
 
