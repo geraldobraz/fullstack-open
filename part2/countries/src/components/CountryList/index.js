@@ -1,8 +1,11 @@
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import CountryDetails from '../CountryDetails';
 
 const CountryList = ({ countries }) => {
-  
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+
   const FormattedList = useCallback(() => {
     const total = countries.length;
     if (total === 0) {
@@ -11,28 +14,13 @@ const CountryList = ({ countries }) => {
       )
     } else if (total === 1) {
       return (
-        <>
-          <h1>{countries[0].name}</h1>
-
-          <p>capital: {countries[0].capital}</p>
-          <p>population: {countries[0].population}</p>
-
-          <h2>Languages</h2>
-          
-          <ul>
-            {countries[0].languages.map((language, idx) => (
-              <li key={idx}>{language.name}</li>
-            ))}
-          </ul>
-
-          <img src={countries[0].flag} alt="Country Flag" height={250} width={500}/>
-        </>
+        <CountryDetails country={countries[0]} />
       );
     } else if (total <= 10) {
       return (
         <div>
           {countries.map((country, idx) => (
-            <div key={idx}>{country.name}</div>
+            <div key={idx}>{country.name} <button onClick={() => handleCountryClick(country)}>show</button></div>
           ))}
         </div>
       );
@@ -45,10 +33,16 @@ const CountryList = ({ countries }) => {
   }, [countries]);
 
 
+  const handleCountryClick = (country) => {
+    setSelectedCountry(country);
+  }
+
   return (
-    <div>
-      <FormattedList />
-    </div>
+    <>
+      {selectedCountry ? (<CountryDetails country={selectedCountry} />): (<FormattedList />)}
+    </>
+      
+
   );
 }
 
