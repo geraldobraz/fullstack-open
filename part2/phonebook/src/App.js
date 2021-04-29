@@ -25,7 +25,9 @@ const App = () => {
       return;
     }
     
-    setPersons([...persons, newPerson]);
+    api.post('/persons', newPerson).then(res => {
+      setPersons([...persons, newPerson]);
+    });
   }
   
   const handlePersonChange = (e) => {
