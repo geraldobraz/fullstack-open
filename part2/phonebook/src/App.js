@@ -25,8 +25,10 @@ const App = () => {
       return;
     }
     
-    api.create('/persons', newPerson).then(res => {
-      setPersons([...persons, newPerson]);
+    api.create(newPerson).then(({ data }) => {
+      const temp = [...persons, { ...newPerson, id: data}];
+      console.log(temp);
+      setPersons(temp);
     });
   }
   
@@ -40,6 +42,13 @@ const App = () => {
   
   const handleSearchPersons = (e) => {
     setSearchedName(e.target.value);
+  };
+
+  const handleContactDeletion = (person) => {
+    window.confirm(`Delete ${person.name}`) && 
+    api.deleteById(person.id).then(res => {
+      setPersons(persons.filter(({id}) => person.id !== id));
+    });
   };
 
   const personsToShow = useMemo(() => {
@@ -70,7 +79,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} />
+      <Persons deleteContact={handleContactDeletion} personsToShow={personsToShow} />
     </div>
   )
 }
