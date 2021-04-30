@@ -25,7 +25,7 @@ const App = () => {
       return;
     }
     
-    api.post('/persons', newPerson).then(res => {
+    api.create('/persons', newPerson).then(res => {
       setPersons([...persons, newPerson]);
     });
   }
@@ -52,7 +52,7 @@ const App = () => {
 
 
   useEffect(() => {
-    api.get('/persons').then(({ data }) => {
+    api.getAll('/persons').then(({ data }) => {
       setPersons(data)
     });
   }, []);
