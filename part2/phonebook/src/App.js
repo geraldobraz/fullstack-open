@@ -21,15 +21,17 @@ const App = () => {
     const personNameAlreadyExists = persons.find(person => person.name === newName);
 
     if (personNameAlreadyExists) {
-      alert(`${newName} is already added to phonebook`);
-      return;
+      api.updateUserById(personNameAlreadyExists.id, newPerson).then(({ data }) => {
+        const personsFormatted = persons.filter(person => person.id !== data.id);
+        setPersons([...personsFormatted, data]);
+      });
+    } else {
+      api.create(newPerson).then(({ data }) => {
+        const temp = [...persons, { ...newPerson, id: data.id}];
+        setPersons(temp);
+      });
     }
     
-    api.create(newPerson).then(({ data }) => {
-      const temp = [...persons, { ...newPerson, id: data}];
-      console.log(temp);
-      setPersons(temp);
-    });
   }
   
   const handlePersonChange = (e) => {

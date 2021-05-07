@@ -10,12 +10,16 @@ const getAll = () => {
 };
 
 const deleteById = (id) => {
-  console.log(id);
   return axios.delete(`${baseURL}/persons/${id}`);
+};
+
+const updateUserById = (id, user) => {
+  return axios.put(`${baseURL}/persons/${id}`, user);
 };
 
 export default {
   create,
   getAll,
   deleteById,
+  updateUserById,
 };
