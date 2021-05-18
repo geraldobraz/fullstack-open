@@ -27,8 +27,7 @@ const App = () => {
       });
     } else {
       api.create(newPerson).then(({ data }) => {
-        const temp = [...persons, { ...newPerson, id: data.id}];
-        setPersons(temp);
+        setPersons(data);
       });
     }
     
