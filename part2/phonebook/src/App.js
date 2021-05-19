@@ -27,7 +27,7 @@ const App = () => {
       });
     } else {
       api.create(newPerson).then(({ data }) => {
-        setPersons(data);
+        setPersons(prev => [...prev, data]);
       });
     }
     
@@ -54,7 +54,7 @@ const App = () => {
 
   const personsToShow = useMemo(() => {
     if (searchedName === '') {
-        return persons;
+      return persons;
     } else {
       return persons.filter(person => person.name.toLowerCase().includes(searchedName));
     }
@@ -63,7 +63,7 @@ const App = () => {
 
   useEffect(() => {
     api.getAll('/persons').then(({ data }) => {
-      setPersons(data)
+      setPersons(data);
     });
   }, []);
 

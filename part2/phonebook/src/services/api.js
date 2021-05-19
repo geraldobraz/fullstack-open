@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseURL = 'http://localhost:3001';
+const baseURL = '/api';
 
 const create = (newContact) => {
   return axios.post(`${baseURL}/persons`, newContact);
